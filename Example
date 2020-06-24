@@ -1,0 +1,14 @@
+SELECT
+	t.id,
+	/*u.first_name as Requestor_First, u.last_name as Requestor_Last, */
+		u.first_name || ' ' || u.last_name as "Requested By",
+		u.email,
+	u.department   as requestor_dep,
+	tw.time_spent/60 as "Time Spent (Min)",
+	 t.assigned_to
+	from tickets t
+		LEFT JOIN users u
+			ON u.id=t.created_by 
+		LEFT JOIN ticket_work tw
+			ON tw.id=t.id;
+		
